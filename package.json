@@ -1,0 +1,25 @@
+{
+  "name": "cosmos",
+  "version": "0.1.0",
+  "description": "[experimental now] a distributed game server framework",
+  "main": "index.js",
+  "dependencies": {
+    "redis": "^0.12.1",
+    "redlock": "^0.2.0",
+    "zerorpc": "^0.9.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmosbox/cosmos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cosmosbox/cosmos/issues"
+  },
+  "homepage": "https://github.com/cosmosbox/cosmos#readme"
+}
