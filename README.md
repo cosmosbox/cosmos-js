@@ -1,2 +1,6 @@
 # cosmosky
-[experimental now] a game server framework
+[experimental now]
+a distributed game server framework
+
+
+etcd + zerorpc + ansible + supervisord
