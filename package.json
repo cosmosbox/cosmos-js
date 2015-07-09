@@ -4,13 +4,17 @@
   "description": "[experimental now] a distributed game server framework",
   "main": "index.js",
   "dependencies": {
+    "bluebird": "^2.9.32",
     "redis": "^0.12.1",
     "redlock": "^0.2.0",
+    "underscore": "^1.8.3",
     "zerorpc": "^0.9.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha.cmd"
   },
   "repository": {
     "type": "git",
