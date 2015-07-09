@@ -35,25 +35,24 @@ describe('etcdManager', function() {
 	// var Etcd = require('node-etcd');
 	// var etcd = new Etcd();
 	// Promise.promisifyAll(etcd);
+	var etcManager = require('../lib/etcManager')('localhost', 4001);
+	it('etcd get & set', function() {
 
-	// it('etcd get & set', function() {
+		var rand = _.random().toString();
+		return etcManager._setKey('test:etcd_test', rand)
+			.then(function(){
+				return etcManager._getKey('test:etcd_test');
+			})
+			.then(function(getValue) {
+				assert.equal(getValue == rand);
 
-	// 	var rand = _.random().toString();
-	// 	etcd.setAsync('test:etcd_test', rand)
-	// 		.then(function(){
-	// 			return getAsync('test:etcd_test');
-	// 		})
-	// 		.then(function(getValue) {
-				
-	// 			assert.equal(getValue == rand);
+			});
+	});
 
-	// 		});
-	// });
+	it('getNodeInfo is json object', function() {
 
-	it('getNodeInfoAsync is json object', function() {
-
-		var etcManager = require('../lib/etcManager');
-		etcManager.getNodeInfosAsync()
+		
+		return etcManager.getNodeInfos()
 			.then(function(infos) {
 				assert.equal(typeof infos, 'object');
 
