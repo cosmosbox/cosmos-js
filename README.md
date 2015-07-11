@@ -21,6 +21,10 @@ a node js distributed game server framework
 * 无状态：进程被kill的影响降到最低
 * 可协程, 可Promise
 
+## Node Js开发组件
+
+* babel: 使用最新的ECMAScript 6进行开发，纯面向对象，要配合Gulp
+* bluebird/promise: NodeJS回调优化，实现类协程
 
 ## 关键的第三方组件/库:
 
@@ -29,10 +33,11 @@ a node js distributed game server framework
 * zerorpc: 基于zeromq的RPC服务, 实现所有节点的稳健调用
 * redis: 服务数据缓存，实现app无状态的关键，每一个物理机有独立的redis缓存
 * redlock: redis分布式锁，实现稳健的缓存读写
-* bluebird/promise: NodeJS回调优化，实现类协程
 * supervisord: 进程管理器，实现单进程高可用
 * messagepack: 通讯协议，优化过的json
 * ansible: 分布式部署
+
+
 
 
 

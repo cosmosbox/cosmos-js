@@ -12,10 +12,12 @@
     "zerorpc": "^0.9.5"
   },
   "devDependencies": {
+    "chai": "^3.0.0",
+    "gulp-babel": "^5.1.0",
     "mocha": "^2.2.5"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha.cmd"
+    "test": "./node_modules/.bin/mocha.cmd --timeout 5000 --compilers js:babel/register"
   },
   "repository": {
     "type": "git",
