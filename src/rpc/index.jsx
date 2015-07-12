@@ -62,10 +62,10 @@ Rpc.prototype.onActorsChanged = function(actors) {
 		this[actorName] = proxyFuncs;
 
 		// rpc function create
-		funcs.forEach(funcName => {
+		funcs.forEach(function(funcName) {
 			logger.info(util.format("Create Function: %s, From actor: %s", funcName, actor.host + ":" + actor.rpcPort));
 			proxyFuncs[funcName] = function() {
-				return new Promise((resolve, reject) => {
+				return new Promise(function(resolve, reject) {
 					return rpcClient.call(funcName)
 						.then(res => {
 							resolve(res);
@@ -84,7 +84,7 @@ Rpc.prototype.onActorsChanged = function(actors) {
 Rpc.prototype.register = function() {
 	var $this = this;
 	return this.etcManager.registerActor(this.actor)
-		.then(isSuccess => {
+		.then(function(isSuccess) {
 			if (!isSuccess) {
 				logger.error("Error registerActor!");
 				return new Promise(resolve => {
@@ -100,7 +100,7 @@ Rpc.prototype.init = function() {
 	// register
 	var $this = this;
 	return $this.register()
-		.then(() => {
+		.then(function() {
 
 			// heartbreak for etcd
 			setInterval(function() {

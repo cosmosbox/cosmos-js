@@ -6,7 +6,7 @@ class RpcClient {
 		this.client = client;
 	}
 
-	call(funcName : string) {
+	call(funcName) {
 		var $arguments = arguments;
 		return new Promise((resolve, reject) => {
 			logger.info("Rpc to function: " + funcName);
