@@ -1,7 +1,10 @@
 var assert = require('chai').assert;
 var _ = require('underscore');
 var Promise = require('bluebird');
+var logger = require('../lib/logger').getLogger('test');
+var util = require('util');
 
+var appConfig = require('../lib/configDefault');
 
 describe('bluebird', function() {
 
@@ -36,13 +39,13 @@ describe('etcdManager', function() {
 	// var etcd = new Etcd();
 	// Promise.promisifyAll(etcd);
 	var EtcManager = require('../lib/etcManager');
-	var etcManager = new EtcManager('localhost', 4001);
+	var etcManager = new EtcManager(appConfig.etcConfig);
 	it('etcd get & set', function() {
 
 		var rand = _.random(0, 10000).toString();
-		return etcManager.setKey('test:etcd_test', rand)
+		return etcManager.setKey('etcd_test', rand)
 			.then(function(){
-				return etcManager.getKey('test:etcd_test');
+				return etcManager.getKey('etcd_test');
 			})
 			.then(function(value, info) {
 				assert.equal(value, rand);
@@ -52,15 +55,58 @@ describe('etcdManager', function() {
 				assert.equal(false);
 			});
 	});
+	it('etcd dir set & get!', function() {
+		return etcManager.setKey('test/A', '{"a":"AValue"}').then(function() {
+			return etcManager.setKey('test/B', 'BValue');
+		}).then(function() {
+			return etcManager.getKey('test/')
+		}).then(function(values) {
+			assert.typeOf(values, 'object');
+			console.log("\t" + util.inspect(values));
 
-	it('getActors is json object', function() {
+			assert.equal(values.A.a, "AValue");
+			assert.equal(values.B, "BValue");
+		});
+
+	});
+
+
+	// it('test the etcd watchcher', function() {
+	// 	var onWatcherChagned = function(etcdValue) {
+	// 		logger.error("[onWatcherChagned]");
+	// 		var jValue = etcManager._etcdNodeToJSON(etcdValue.node);			
+	// 		assert(true);
+	// 	}
+	// 	var watcher = etcManager.theEtcd.watcher('test/');
+	// 	watcher.on("change", onWatcherChagned); // Triggers on all changes
+	// 	watcher.on("set", onWatcherChagned); // Triggers on specific changes (set ops)
+	// 	watcher.on("delete", onWatcherChagned); // Triggers on delete.
+		
+	// 	watcher.on("error", function() {
+	// 		assert(false);
+	// 		logger.error("[initActorsWatcher]watcher error! reconnecct")
+			
+	// 	});
+	// 	return new Promise(function(resolve) {
+	// 		logger.info("Wait 2s to watacher......");
+	// 		setTimeout(resolve, 1000);
+	// 	}).then(function() {
+	// 		return etcManager.setKey('test/C', "value")
+	// 	}).then(function() {
+	// 		return new Promise(function(resolve) {
+	// 			setTimeout(resolve, 1000);
+	// 		});
+	// 	})
+		
+	// });
+	it('getActors is object', function() {
 		return etcManager.getActors()
 			.then(function(actors) {
-
 				assert.typeOf(actors, 'object', "Get actors: " + actors);
 
 			})
 			.catch(function(err) {
+				logger.error(err);
 				assert(false, "get actor failed!");
 			});
 	});
@@ -74,18 +120,17 @@ describe('rpc', function() {
 	var TestRemote = require('./testRemote');
 	var Cosmos = require('../lib').Cosmos;
 
-	var appConfig1 = require('../lib/configDefault').appConfig;
-	var nodeConfig1 = {
+	var appConfig1 = require('../lib/configDefault');
+	var actorConfig1 = {
 		name : "actor1",
 		handler : TestHandler,
 		remote : TestRemote,
 		host : "localhost",
-		rpcPort:12345,
-		rpcServPort:12344
+		rpcPort:12345
 	};
-	var actor1 = new Cosmos(appConfig1, nodeConfig1);
+	var actor1 = new Cosmos(appConfig1, actorConfig1);
 
-	var nodeConfig2 = {
+	var actorConfig2 = {
 		name : "actor2",
 		handler : TestHandler,
 		remote : TestRemote,
@@ -93,8 +138,9 @@ describe('rpc', function() {
 		rpcPort:12346
 	};
 
-	var appConfig2 = require('../lib/configDefault').appConfig;
-	var actor2 = new Cosmos(appConfig2, nodeConfig2);
+	var appConfig2 = require('../lib/configDefault');
+	var actor2 = new Cosmos(appConfig2, actorConfig2);
+
 	it("test rpc", function() {
 		return actor1.start()
 			.then(()=> actor2.start())
@@ -115,7 +161,7 @@ describe('rpc', function() {
 					.then(ret => {
 						assert.equal(ret, "from node 1", "from actor1 RPC actor2:" + ret);
 					}).catch(err => {
-						console.error(err);
+						logger.error(err);
 						assert(false);
 					});
 
@@ -123,9 +169,10 @@ describe('rpc', function() {
 			.then(() => {
 				return actor2.rpc.actor1.rpcTestFromActor2()
 					.then(function(ret) {
+						logger.info("RPC from node 2");
 						assert.equal(ret, "from node 2")
 					}).catch(function(err) {
-						console.error(err);
+						logger.error(err);
 						assert.equal(false);
 					});
 			});

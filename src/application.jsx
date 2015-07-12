@@ -1,10 +1,11 @@
+var logger = require('./logger').getLogger('cosmos');
 
 class Application {
 
 	init() {
 		return new Promise((resolve, reject) => {
 
-			console.log("=== Application inited! ===");
+			logger.info("=== Application inited! ===");
 			resolve();
 		});
 	}

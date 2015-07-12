@@ -1,4 +1,5 @@
 var Promise = require('bluebird');
+var logger = require('./logger').getLogger('cosmos');
 
 class ActorManager {
 
@@ -13,7 +14,7 @@ class ActorManager {
 
 	init() {
 		return new Promise((resolve, reject) => {
-			console.log("=== ActorManager inited! ===");
+			logger.info("=== ActorManager inited! ===");
 			resolve();
 		});
 	}

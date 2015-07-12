@@ -1,12 +1,11 @@
 
-class TestRemote {
+var TestRemote = function() {}
 
-	rpcTestFromActor1() {
-		return "from node 1";
-	}
-	rpcTestFromActor2() {
-		return "from node 2";
-	}
+TestRemote.prototype.rpcTestFromActor1 = function() {
+	return "from node 1";
+}
+TestRemote.prototype.rpcTestFromActor2 = function() {
+	return "from node 2";
 }
 
 module.exports = TestRemote;

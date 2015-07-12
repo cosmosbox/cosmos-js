@@ -1,3 +1,4 @@
+var logger = require('../logger').getLogger('cosmos');
 
 class RpcClient {
 
@@ -8,7 +9,7 @@ class RpcClient {
 	call(funcName : string) {
 		var $arguments = arguments;
 		return new Promise((resolve, reject) => {
-			console.log("Rpc to function: " + funcName);
+			logger.info("Rpc to function: " + funcName);
 			var $this = this;
 			var applyArgs = [];
 			applyArgs.push('call'); // server.call rpc top func
@@ -29,8 +30,7 @@ class RpcClient {
 				}
 			});
 
-			console.log("Promise to function: " + funcName);
-			console.dir($this.client);
+			logger.info("Promise to function: " + funcName);
 			$this.client.invoke.apply($this.client, applyArgs);
 			// $this.client.invoke('rpcTestFromActor1', (err, res, more) => {
 			// 	console.error("back!!!!!!!!!!!!");

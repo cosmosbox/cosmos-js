@@ -2,52 +2,52 @@ var Application = require('./application');
 var EtcManager = require('./etcManager');
 var Rpc = require('./rpc');
 var ActorManager = require('./actorManager');
+var Logger = require('./logger');
+var logger = Logger.getLogger('cosmos');
+var appConfig = require('./configDefault');
 
-class Cosmos {
+var Cosmos = function(appConfig, actorConfig) {
 
+	this.isStarted = false;
+	this.appConfig = appConfig;
+	this.actorConfig = actorConfig;
 
-	constructor(appConfig, actorConfig) {
+	this.app = new Application();
+	this.actorMgr = new ActorManager(this.actorConfig);
 
-		this.appConfig = appConfig;
-		this.isStarted = false;
-		this.actorConfig = actorConfig;
+	this.etc = new EtcManager(this.appConfig.etcConfig, this.actorMgr);
 
-		this.app = new Application();
-		this.etc = new EtcManager('127.0.0.1', '4001');
-
-		this.actorMgr = new ActorManager(this.actorConfig);
-
-		this.rpc = new Rpc(this.etc, this.actorMgr);
-	}
-
-	start() {
-		var $this = this;
-		return $this.app.init()
-				.then(() => $this.etc.init())
-				.then(() => $this.actorMgr.init())
-				.then(() => $this.rpc.init())
-				.then(()=>{
-					console.log("=== Cosmos finish started! ===");
-					$this.isStarted = true;
-				});
-	}
-
-	getApp() {
-		return this.app;
-	}
-
+	this.rpc = new Rpc(this.etc, this.actorMgr);
 }
 
-var _instance : Cosmos = null;
+Cosmos.prototype.start = function() {
+	var $this = this;
+	return $this.app.init()
+		.then(() => $this.etc.init())
+		.then(() => $this.actorMgr.init())
+		.then(() => $this.rpc.init())
+		.then(() => {
+			logger.info("=== Cosmos finish started! ===");
+			$this.isStarted = true;
+		});
+}
+
+Cosmos.prototype.getApp = function() {
+	return this.app;
+}
+
+var _instance: Cosmos = null;
 
 module.exports = {
-	Cosmos : Cosmos,
-	
-	getApp : function() {
+	Cosmos: Cosmos,
+
+	getApp: function() {
 		if (_instance == null) {
 			_instance = new Cosmos();
 			_instance.start();
 		}
 		return _instance.getApp();
-	}
+	},
+
+	getLogger: Logger.getLogger
 }

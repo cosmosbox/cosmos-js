@@ -1,6 +1,6 @@
 var zerorpc = require('zerorpc');
 var util = require('util');
-
+var logger = require('../logger').getLogger("cosmos");
 class RpcServer {
 	constructor(actor) {
 
@@ -29,10 +29,10 @@ class RpcServer {
 		});
 		var uri = util.format("tcp://0.0.0.0:%s", actor.config.rpcPort);
 		this.rpcServer.bind(uri);
-		console.log("Create Rpc Server: " + uri);
+		logger.info("Create Rpc Server: " + uri);
 
 		this.rpcServer.on("error", function(error) {
-		    console.error("RPC server error:", error);
+		    logger.error("RPC server error:", error);
 		});
 	}
 
