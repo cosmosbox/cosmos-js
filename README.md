@@ -24,7 +24,7 @@ a node js distributed game server framework
 ## Node Js开发组件
 
 * babel(考虑去掉): 使用最新的ECMAScript 6进行开发，纯面向对象，要配合Gulp
-* bluebird/promise: NodeJS回调优化，实现类协程
+* bluebird/promise: NodeJS回调优化
 
 ## 关键的第三方组件/库:
 

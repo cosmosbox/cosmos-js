@@ -6,6 +6,8 @@ var Logger = require('./logger');
 var logger = Logger.getLogger('cosmos');
 var appConfig = require('./configDefault');
 
+var ProjectLoader = require('./projectLoader');
+
 var Cosmos = function(appConfig, actorConfig) {
 
 	this.isStarted = false;
@@ -42,8 +44,10 @@ module.exports = {
 	Cosmos: Cosmos,
 
 	getApp: function() {
+		// use project loader  convenience load project structure folder!
 		if (_instance == null) {
-			_instance = new Cosmos();
+			var projectLoader = new ProjectLoader(process.cwd()); // TODO: pass app.js  dir path;
+			_instance = new Cosmos(projectLoader.appConfig, projectLoader.actorConfig);
 			_instance.start();
 		}
 		return _instance.getApp();
