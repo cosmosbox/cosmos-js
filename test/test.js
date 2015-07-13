@@ -143,30 +143,30 @@ describe('rpc', function() {
 
 	it("test rpc", function() {
 		return actor1.start()
-			.then(()=> actor2.start())
-			.then(() => {
-				return new Promise(resolve => {
+			.then(function() { 
+				actor2.start() 
+			}).then(function() {
+				return new Promise(function(resolve) {
 					assert(actor1.rpc.actor2, 'must has actor 2');
 					assert.typeOf(actor1.rpc.actor2.rpcTestFromActor1, 'function');
 					resolve();
 				});
-			})
-			.then(()=>{
+			}).then(function() {
 				assert(actor1);
 				assert(actor1.rpc);
 				assert(actor1.rpc.actor2);
 				assert.typeOf(actor1.rpc.actor2.rpcTestFromActor1, 'function');
 
 				return actor1.rpc.actor2.rpcTestFromActor1()
-					.then(ret => {
+					.then(function(ret) {
 						assert.equal(ret, "from node 1", "from actor1 RPC actor2:" + ret);
-					}).catch(err => {
+					}).catch(function(err) {
 						logger.error(err);
 						assert(false);
 					});
 
 			})
-			.then(() => {
+			.then(function() {
 				return actor2.rpc.actor1.rpcTestFromActor2()
 					.then(function(ret) {
 						logger.info("RPC from node 2");
