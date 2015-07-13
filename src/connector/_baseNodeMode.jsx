@@ -1,9 +1,3 @@
 
-class BaseNodeMode {
-	constructor() {
-		
-	}
-
-}
-
+var BaseNodeMode = function() {}
 module.exports = BaseNodeMode;
