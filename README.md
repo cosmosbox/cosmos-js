@@ -13,15 +13,26 @@ a node js distributed game server framework
 ![cosmos架构图](./docs/architecture.jpg)
 
 我是一个actor，向etcd注册我自己，然后etcd就告诉我的同伴——其它actor了
+
 然后，我就可以跟他们rpc了！我就是我！
+
 有一天，一个新的actor又加入了，
+
 etcd会主动告诉我，然后我又可以跟这个新成员rpc了
 
 看起来etcd很重要嘛！它（master）死了怎么办？
+
 不要紧, etcd是分布式高可用的！etcd1死了，etcd2补上
 
 ### 类比, 学生与学校
 ![我的学生之旅](./docs/school.jpg)
+
+## cosmos模块化
+
+* cosmos : 本质上一个工程管理器，读取配置，启动actor
+	* cosmos-actor : 核心，一个自动发现的RPC框架，可脱离cosmos单独使用，向etcd注册，向同伴rpc
+	* cosmos-logger : 打印日志，无他
+
 
 ## 希望使用....
 
