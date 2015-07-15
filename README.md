@@ -51,7 +51,7 @@ etcd会主动告诉我，然后我又可以跟这个新成员rpc了
 
 ## Node Js开发组件
 
-* babel(考虑去掉): 使用最新的ECMAScript 6进行开发，纯面向对象，要配合Gulp
+* babel(已弃用): 使用最新的ECMAScript 6进行开发，纯面向对象，要配合Gulp
 * bluebird/promise: NodeJS回调优化
 
 ## 关键的第三方组件/库:
@@ -66,11 +66,16 @@ etcd会主动告诉我，然后我又可以跟这个新成员rpc了
 * ansible: 分布式部署
 
 
+## 优势
 
+* 分布式
+* 极致简单, 一个actor非常轻量级，本质就是两个类(handler和remote)加一个自动发现RPC
+* 去中心化, 无Master,高可用
+* Actor逻辑部分（handler），可以直接跟第三方框架结合(比如actor+expressjs, actor+protobuff等)
 
+## 劣势
 
-
-## 节点
+* 施工中....
 
 ### rpc
 
@@ -78,7 +83,6 @@ etcd会主动告诉我，然后我又可以跟这个新成员rpc了
 
 * http
 * zeromq/netmq
-
 
 
 ## 灵感来源
