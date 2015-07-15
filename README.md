@@ -70,12 +70,21 @@ etcd会主动告诉我，然后我又可以跟这个新成员rpc了
 
 * 分布式
 * 极致简单, 一个actor非常轻量级，本质就是两个类(handler和remote)加一个自动发现RPC
-* 去中心化, 无Master,高可用
 * Actor逻辑部分（handler），可以直接跟第三方框架结合(比如actor+expressjs, actor+protobuff等)
+* 去中心化, 无Master,高可用, 
+
 
 ## 劣势
 
 * 施工中....
+
+## 对比同类产品
+对比skynet, pomelo, firefly这类游戏服务器框架
+
+* 最大的区别，没有master (其它类似中master都是关键)
+* 不打算提供任何客户端连接方式
+* 作者非常懒，所有核心部分都使用第三方稳定组件(RPC, 服务发现, 进程管理)
+* 纯基于Promise，彻底并优雅地异步
 
 ### rpc
 
