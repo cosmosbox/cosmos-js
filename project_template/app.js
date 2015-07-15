@@ -1,2 +1,0 @@
-
-var cosmos = require('cosmos');
