@@ -1,0 +1,40 @@
+{
+  "name": "cosmos",
+  "version": "1.0.0",
+  "description": "实验中....\r [experimental now]\r a node js distributed game server framework",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "commander": "^2.8.1",
+    "bluebird": "^2.9.32",
+    "gulp": "^3.9.0",
+    "chai": "^3.0.0",
+    "cosmos-logger": "^1.0.0",
+    "cosmos-actor": "^0.1.0",
+    "log4js": "^0.6.26",
+    "log4js-extend": "^0.1.2",
+    "redlock": "^0.2.0",
+    "redis": "^0.12.1",
+    "node-etcd": "^4.0.2",
+    "underscore": "^1.8.3",
+    "zerorpc": "^0.9.5"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmosbox/cosmos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cosmosbox/cosmos/issues"
+  },
+  "homepage": "https://github.com/cosmosbox/cosmos#readme"
+}
