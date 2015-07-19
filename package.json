@@ -7,17 +7,16 @@
     "doc": "docs"
   },
   "dependencies": {
-    "commander": "^2.8.1",
     "bluebird": "^2.9.32",
-    "gulp": "^3.9.0",
     "chai": "^3.0.0",
-    "cosmos-logger": "^1.0.0",
-    "cosmos-actor": "^0.1.0",
+    "commander": "^2.8.1",
+    "gulp": "^3.9.0",
     "log4js": "^0.6.26",
     "log4js-extend": "^0.1.2",
-    "redlock": "^0.2.0",
-    "redis": "^0.12.1",
     "node-etcd": "^4.0.2",
+    "random-port": "^0.1.0",
+    "redis": "^0.12.1",
+    "redlock": "^0.2.0",
     "underscore": "^1.8.3",
     "zerorpc": "^0.9.5"
   },

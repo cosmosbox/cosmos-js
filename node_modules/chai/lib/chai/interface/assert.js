@@ -331,6 +331,37 @@ module.exports = function (chai, util) {
   };
 
   /**
+   * ### .isNaN
+   * Asserts that value is NaN
+   *
+   *    assert.isNaN('foo', 'foo is NaN');
+   *
+   * @name isNaN
+   * @param {Mixed} value
+   * @param {String} message
+   * @api public
+   */
+
+  assert.isNaN = function (val, msg) {
+    new Assertion(val, msg).to.be.NaN;
+  };
+
+  /**
+   * ### .isNotNaN
+   * Asserts that value is not NaN
+   *
+   *    assert.isNotNaN(4, '4 is not NaN');
+   *
+   * @name isNotNaN
+   * @param {Mixed} value
+   * @param {String} message
+   * @api public
+   */
+  assert.isNotNaN = function (val, msg) {
+    new Assertion(val, msg).not.to.be.NaN;
+  };
+
+  /**
    * ### .isUndefined(value, [message])
    *
    * Asserts that `value` is `undefined`.
@@ -1261,6 +1292,121 @@ module.exports = function (chai, util) {
     if (val) {
       throw(val);
     }
+  };
+
+  /**
+   * ### .extensible(object)
+   *
+   * Asserts that `object` is extensible (can have new properties added to it).
+   *
+   *     assert.extensible({});
+   *
+   * @name extensible
+   * @param {Object} object
+   * @param {String} message _optional_
+   * @api public
+   */
+
+  assert.extensible = function (obj, msg) {
+    new Assertion(obj, msg).to.be.extensible;
+  };
+
+  /**
+   * ### .notExtensible(object)
+   *
+   * Asserts that `object` is _not_ extensible.
+   *
+   *     var nonExtensibleObject = Object.preventExtensions({});
+   *     var sealedObject = Object.seal({});
+   *     var frozenObject = Object.freese({});
+   *
+   *     assert.notExtensible(nonExtensibleObject);
+   *     assert.notExtensible(sealedObject);
+   *     assert.notExtensible(frozenObject);
+   *
+   * @name notExtensible
+   * @param {Object} object
+   * @param {String} message _optional_
+   * @api public
+   */
+
+  assert.notExtensible = function (obj, msg) {
+    new Assertion(obj, msg).to.not.be.extensible;
+  };
+
+  /**
+   * ### .sealed(object)
+   *
+   * Asserts that `object` is sealed (cannot have new properties added to it
+   * and its existing properties cannot be removed).
+   *
+   *     var sealedObject = Object.seal({});
+   *     var frozenObject = Object.seal({});
+   *
+   *     assert.sealed(sealedObject);
+   *     assert.sealed(frozenObject);
+   *
+   * @name sealed
+   * @param {Object} object
+   * @param {String} message _optional_
+   * @api public
+   */
+
+  assert.sealed = function (obj, msg) {
+    new Assertion(obj, msg).to.be.sealed;
+  };
+
+  /**
+   * ### .notSealed(object)
+   *
+   * Asserts that `object` is _not_ sealed.
+   *
+   *     assert.notSealed({});
+   *
+   * @name notSealed
+   * @param {Object} object
+   * @param {String} message _optional_
+   * @api public
+   */
+
+  assert.notSealed = function (obj, msg) {
+    new Assertion(obj, msg).to.not.be.sealed;
+  };
+
+  /**
+   * ### .frozen(object)
+   *
+   * Asserts that `object` is frozen (cannot have new properties added to it
+   * and its existing properties cannot be modified).
+   *
+   *     var frozenObject = Object.freeze({});
+   *     assert.frozen(frozenObject);
+   *
+   * @name frozen
+   * @param {Object} object
+   * @param {String} message _optional_
+   * @api public
+   */
+
+  assert.frozen = function (obj, msg) {
+    new Assertion(obj, msg).to.be.frozen;
+  };
+
+  /**
+   * ### .notFrozen(object)
+   *
+   * Asserts that `object` is _not_ frozen.
+   *
+   *     assert.notFrozen({});
+   *
+   * @name notSealed
+   * @param {Object} object
+   * @param {String} message _optional_
+   * @api public
+   */
+
+  assert.notFrozen = function (obj, msg) {
+    new Assertion(obj, msg).to.not.be.frozen;
   };
 
   /*!

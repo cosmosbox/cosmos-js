@@ -6,8 +6,12 @@ var Handler = function(actor) {
 
 	http.createServer(function(req, res) {
 		
-		res.writeHeader(status,{'Content-Type':'text/plain'});
-    	res.end('Ask http1, answer: ' + 'yes!');
+		app.rpc.http1.whoAreYou.then(function(result) {
+
+			res.writeHeader(status,{'Content-Type':'text/plain'});
+    		res.end('Ask http1, answer: ' + result);
+    		
+		});
 
 	}).listen(actorConfig.httpPort);
 }
