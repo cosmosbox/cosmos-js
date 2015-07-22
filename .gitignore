@@ -26,3 +26,4 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 #node_modules
 /etcd-v2.0.13-windows-amd64/default.etcd
+/.vagrant
