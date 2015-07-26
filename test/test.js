@@ -1,10 +1,10 @@
 var assert = require('chai').assert;
 var _ = require('underscore');
 var Promise = require('bluebird');
-var logger = require('cosmos-logger').getLogger('test');
+var logger = require('../lib/logger/').getLogger('test');
 var util = require('util');
 
-var appConfig = require('../lib/configDefault');
+var appConfig = require('../lib/actor/configDefault');
 
 describe('bluebird', function() {
 
@@ -89,7 +89,7 @@ describe('rpc', function() {
 	
 	var TestHandler = require('./testHandler');
 	var TestRemote = require('./testRemote');
-	var CosmosActor = require('../lib').CosmosActor;
+	var CosmosActor = require('../lib/actor').CosmosActor;
 
 	var appConfig1 = require('../lib/configDefault');
 	var actorConfig1 = {
