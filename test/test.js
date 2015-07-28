@@ -141,10 +141,14 @@ describe('rpc', function() {
 
 			})
 			.then(function() {
-				return actor2.rpc.actor1.rpcTestFromActor2()
+				return actor2.rpc.call('actor1', 'rpcTestFromActor2')
 					.then(function(ret) {
 						logger.info("RPC from node 2");
 						assert.equal(ret, "from node 2")
+
+						done();
+
+						
 					}).catch(function(err) {
 						logger.error(err);
 						assert.equal(false);
