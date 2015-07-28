@@ -96,7 +96,7 @@ describe('rpc', function() {
 		name : "actor1",
 		handler : TestHandler,
 		remote : TestRemote,
-		host : "localhost"
+		host : "127.0.0.1"
 	};
 	var actor1 = new CosmosActor(appConfig1, actorConfig1);
 
@@ -104,7 +104,7 @@ describe('rpc', function() {
 		name : "actor2",
 		handler : TestHandler,
 		remote : TestRemote,
-		host : "localhost"
+		host : "127.0.0.1"
 	};
 
 	var appConfig2 = require('../lib/actor/configDefault');
@@ -122,17 +122,16 @@ describe('rpc', function() {
 			}).then(function() {
 				logger.warn('now 2 actors start ok');
 				return new Promise(function(resolve) {
-					assert(actor1.rpc.actor2, 'must has actor 2');
-					assert.typeOf(actor1.rpc.actor2.rpcTestFromActor1, 'function');
+					assert.typeOf(actor1.rpc.call, 'function');
 					resolve();
 				});
 			}).then(function() {
 				assert(actor1);
 				assert(actor1.rpc);
-				assert(actor1.rpc.actor2);
-				assert.typeOf(actor1.rpc.actor2.rpcTestFromActor1, 'function');
+				assert.typeOf(actor1.rpc.call, 'function');
+				// assert.typeOf(actor1.rpc('actor2', 'rpcTestFromActor1', 'function');
 
-				return actor1.rpc.actor2.rpcTestFromActor1()
+				return actor1.rpc.call('actor2', 'rpcTestFromActor1')
 					.then(function(ret) {
 						assert.equal(ret, "from node 1", "from actor1 RPC actor2:" + ret);
 					}).catch(function(err) {
