@@ -89,9 +89,9 @@ describe('rpc', function() {
 	
 	var TestHandler = require('./testHandler');
 	var TestRemote = require('./testRemote');
-	var CosmosActor = require('../lib/actor').CosmosActor;
+	var CosmosActor = require('../lib/actor');
 
-	var appConfig1 = require('../lib/configDefault');
+	var appConfig1 = require('../lib/actor/configDefault');
 	var actorConfig1 = {
 		name : "actor1",
 		handler : TestHandler,
@@ -107,10 +107,10 @@ describe('rpc', function() {
 		host : "localhost"
 	};
 
-	var appConfig2 = require('../lib/configDefault');
+	var appConfig2 = require('../lib/actor/configDefault');
 	var actor2 = new CosmosActor(appConfig2, actorConfig2);
 
-	it("test rpc", function() {
+	it("test rpc", function(done) {
 		return actor1.start()
 			.then(function() { 
 				return actor2.start() 

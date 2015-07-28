@@ -18,7 +18,8 @@
     "redis": "^0.12.1",
     "redlock": "^0.2.0",
     "underscore": "^1.8.3",
-    "axon-rpc": "0.0.3"
+    "axon-rpc": "0.0.3",
+    "axon": "^2.0.2"
   },
   "devDependencies": {
     "mocha": "^2.2.5"
